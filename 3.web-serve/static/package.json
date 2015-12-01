@@ -1,0 +1,35 @@
+{
+  "name": "imdb-visualize",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "build-visual": "watchify -v -d -o build/visualize.js app/VisualizeApp.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "babelify": "^6.3.0",
+    "browserify": "^12.0.1",
+    "reactify": "^1.1.1",
+    "watchify": "^3.6.1"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+        }
+      ],
+      "reactify"
+    ]
+  },
+  "dependencies": {
+    "object-assign": "^4.0.1",
+    "react": "^0.14.3",
+    "react-bootstrap": "^0.28.1",
+    "react-dom": "^0.14.3"
+  }
+}

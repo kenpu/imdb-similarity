@@ -8,6 +8,10 @@ app = Flask(__name__)
 def index_page():
     return render_template("index.html")
 
+@app.route("/visualize/")
+def visualize_page():
+    return render_template("visualize.html")
+
 @app.route("/api/similarity/<attribute>/")
 def api_similarity(attribute):
     start   = time()
@@ -16,7 +20,7 @@ def api_similarity(attribute):
     err     = None
 
     try:
-        sim, size = imdb.get_similarity(attribute)
+        sim, size = imdb.get_similarity(attribute, cache=True)
         sim = sorted([[x[0], x[1], y] for x,y in sim.items()], 
                 key=lambda t: t[2], reverse=1)
     except Exception, e:
