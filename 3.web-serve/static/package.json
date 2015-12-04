@@ -20,13 +20,13 @@
     "transform": [
       [
         "babelify",
-        {
-        }
+        {}
       ],
       "reactify"
     ]
   },
   "dependencies": {
+    "heap": "^0.2.6",
     "object-assign": "^4.0.1",
     "react": "^0.14.3",
     "react-bootstrap": "^0.28.1",

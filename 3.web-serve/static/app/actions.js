@@ -8,7 +8,9 @@ function apiURL(attribute) {
 
 
 function fetchSimilarity(event,  attribute) {
-    state.loading = true;
+    store.setState({
+        loading: true,
+    });
     store.emitChange();
 
     let url = apiURL(attribute);
@@ -19,8 +21,10 @@ function fetchSimilarity(event,  attribute) {
         if(data.err) {
             console.error(data.err);
         }
-        state = assign(state, data);
-        state.loading = false;
+        store.setState(data);
+        store.setState({
+            loading: false,
+        });
         store.emitChange();
     });
 }

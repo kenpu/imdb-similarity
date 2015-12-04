@@ -20,10 +20,12 @@ const store = assign({}, eventEmitter.prototype, {
     getState: function() {
         return state;
     },
+    setState: function(data) {
+        state = assign(state, data);
+    },
 });
 
 
 window.state = state;
-window.store = store;
 
 module.exports = store;
