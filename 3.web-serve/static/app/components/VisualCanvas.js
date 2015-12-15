@@ -21,9 +21,10 @@ var VisualCanvas = React.createClass({
             height,
         } = this.props;
 
+        /*
         let g = Graph.make(sim, size);
         let data = Graph.prims(g);
-
+        */
 
         return (
             <div>

@@ -1,11 +1,9 @@
 var store = require('./store');
 var assign = require('object-assign');
 
-
 function apiURL(attribute) {
     return "/api/similarity/" + attribute + "/";
 }
-
 
 function fetchSimilarity(event,  attribute) {
     store.setState({

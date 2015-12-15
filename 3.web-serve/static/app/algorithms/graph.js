@@ -1,5 +1,18 @@
 const Heap = require('heap');
 
+// Makes a graph
+//   edges: [ [a, b, edgeWeight], ... ]
+//   sizes: { a: weight, ... }
+//
+// Returns:
+//   { a: { "label": label,
+//          "size": weight,
+//          "neighbours": {
+//            b: edgeWeight,
+//            ...
+//          }
+//      }, ...
+//   }
 function make(edges, sizes) {
     var graph = {};
 
@@ -33,6 +46,7 @@ function make(edges, sizes) {
     return graph;
 }
 
+// Returns [ a, ... ]
 function nodes(graph) {
     var n = [];
 
@@ -43,11 +57,17 @@ function nodes(graph) {
     return n;
 }
 
+// Returns the edgeWeight between two nodes
+//   u, v: ID
 function similarity(graph, u, v) {
     let sim = graph[u].neighbours[v] || 0;
     return sim;
 }
 
+// Computes a MST starting with a root node.
+//   r: ID
+// Returns
+//   data: {?}
 function prims(graph, r) {
     // if no root is specified, just use the first label
     if(! r) {
@@ -76,8 +96,6 @@ function prims(graph, r) {
         heap.push(u.label);
     });
 
-    console.debug("Heap has %d things", heap.size());
-
     // greedily connect vertices to the tree
     while(! heap.empty()) {
         var u = heap.pop();
@@ -94,8 +112,18 @@ function prims(graph, r) {
         }
     }
 
-    // done
-    return data;
+    // done.  Now convert it to a tree
+    var children = {};
+    for(var v in data) {
+        var p = data[v].parent;
+        if(p in children) {
+            children[p].push(v);
+        } else {
+            children[p] = [v];
+        }
+    }
+
+    return tree;
 }
 
 module.exports = {
