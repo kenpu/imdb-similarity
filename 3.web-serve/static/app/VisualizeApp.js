@@ -23,12 +23,14 @@ var VisualizeApp = React.createClass({
             sim,
             size,
             loading,
+            name,
         } = store.getState();
 
         var body;
         if(! loading) {
             if(sim && size)
                 body = (<VisualCanvas 
+                            name={name}
                             sim={sim} 
                             size={size}
                             width={800}

@@ -8,6 +8,7 @@ function apiURL(attribute) {
 function fetchSimilarity(event,  attribute) {
     store.setState({
         loading: true,
+        name: "",
     });
     store.emitChange();
 
@@ -22,6 +23,7 @@ function fetchSimilarity(event,  attribute) {
         store.setState(data);
         store.setState({
             loading: false,
+            name: attribute,
         });
         store.emitChange();
     });

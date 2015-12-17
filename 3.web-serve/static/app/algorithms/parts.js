@@ -48,8 +48,19 @@ function Charge(sys) {
     }
 }
 
-function Gravity(sys) {
+function MaxLength(sys) {
     return function() {
+        sys.allEdges(function(p1, p2) {
+            physics.moveClose(p1, p2, sys.config.Lmax);
+        });
+    }
+}
+
+function Gravity(sys, w, h) {
+    return function() {
+        sys.allParticles(function(p) {
+            physics.gravity(p, w, h, sys.config.G);
+        });
     }
 }
 
@@ -101,6 +112,7 @@ module.exports = {
     Charge,
     Gravity,
     Collision,
+    MaxLength,
     Boundary,
     Draw,
 }

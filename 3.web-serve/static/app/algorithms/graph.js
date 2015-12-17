@@ -1,5 +1,6 @@
 const Heap = require('heap');
 const Simulate = require('./simulate');
+const Config = require('./config');
 
 // Makes a graph
 //   edges: [ [a, b, edgeWeight], ... ]
@@ -132,14 +133,17 @@ function prims(graph, r) {
 }
 
 // export a graph to a system
-function mksys(graph, mst, w, h) {
+function mksys(name, graph, mst, w, h) {
+    var conf = Config(name);
     var sys = new Simulate.System();
+    var r = conf.defaultR;
+
     for(var i in graph) {
         var p = {
             id: i,
             x: Math.random() * w,
             y: Math.random() * h,
-            r: 30 //graph[i].size,
+            r: r //graph[i].size,
         };
         sys.add(p);
     }

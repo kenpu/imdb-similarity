@@ -1,9 +1,10 @@
 var assign = require('object-assign');
 var physics = require('./physics');
+var config = require('./config');
 
 var damp = 0.1;
 
-function System(o) {
+function System() {
     this.particles = {};
     this.adjacency = {};
     this.idlist = [];
@@ -14,17 +15,7 @@ function System(o) {
     this.monitors = [];
 
     this.iter = 0;
-    this.config = assign({
-        maxIter:            4,
-        delay:              100,
-        dt:                 0.1,
-        K:                  1/100,
-        L0:                 5,
-        C:                  300000,
-        ACCELERATE_DAMP:    0.5,
-        BOUNCE_DAMPING:     0.8,
-        COLLISION_DAMPING:  0.8
-    }, o);
+    this.config = config();
 }
 
 System.prototype.add = function(p1) {
@@ -155,7 +146,11 @@ System.prototype.step = function() {
     return this;
 }
 
-System.prototype.start = function() {
+System.prototype.start = function(config) {
+    this.config = assign({}, this.config, config);
+    console.info("===== STARTING =========");
+    console.info(this.config);
+
     this.step();
     return this;
 }
