@@ -31,7 +31,12 @@ var VisualNav = React.createClass({
                   <MenuItem divider />
                   <MenuItem eventKey={3.3}>More to come</MenuItem>
                 </NavDropdown>
+
+                <MenuItem eventKey={1} onSelect={actions.anneal}>
+                    Anneal (1)
+                </MenuItem>
               </Nav>
+
             </Navbar.Collapse>
           </Navbar>
         );

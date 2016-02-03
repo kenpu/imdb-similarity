@@ -2,9 +2,9 @@ const assign = require('object-assign');
 
 var confs = {
     default: {
-        maxIter: 100,
-        delay: 100,
-        dt: 0.1,
+        maxIter: 90,
+        delay: 50,
+        dt: 0.15,
         K: 1/100,
         L0: 5,
         Lmax: 50,
@@ -13,7 +13,7 @@ var confs = {
         defaultR: 20,
     },
     genres: {
-        defaultR: 30,
+        defaultR: 20,
         Lmax: 100,
     },
     countries: {

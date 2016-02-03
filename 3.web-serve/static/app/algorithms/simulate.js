@@ -5,7 +5,13 @@ var config = require('./config');
 var damp = 0.1;
 
 function System() {
+    // [Object]
+    // Objects are objects with
+    // attributes: id, r, x, y, xp, yp
     this.particles = {};
+
+    // Adjacency matrix
+    // { (id1): { (id2): 1, (id3): 1, ... } }
     this.adjacency = {};
     this.idlist = [];
 
@@ -16,6 +22,8 @@ function System() {
 
     this.iter = 0;
     this.config = config();
+    this.width = null;
+    this.height = null;
 }
 
 System.prototype.add = function(p1) {
@@ -150,9 +158,21 @@ System.prototype.start = function(config) {
     this.config = assign({}, this.config, config);
     console.info("===== STARTING =========");
     console.info(this.config);
-
+    this.iter = 0;
     this.step();
     return this;
+}
+
+System.prototype.addNoise = function() {
+    var {width, height} = this;
+    this.allParticles(function(p) {
+        var dx = 0.2 * (0.5-Math.random()) * width;
+        var dy = 0.2 * (0.5-Math.random()) * height;
+        p.x += dx;
+        p.y += dy;
+        p.xp = p.x;
+        p.yp = p.y;
+    });
 }
 
 module.exports = {

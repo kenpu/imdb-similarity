@@ -154,6 +154,10 @@ function mksys(name, graph, mst, w, h) {
         });
     }
 
+    sys.config = conf;
+    sys.width = w;
+    sys.height = h;
+
     return sys;
 }
 

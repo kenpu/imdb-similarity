@@ -24,6 +24,9 @@ var VisualizeApp = React.createClass({
             size,
             loading,
             name,
+            sys,
+            width,
+            height,
         } = store.getState();
 
         var body;
@@ -31,10 +34,9 @@ var VisualizeApp = React.createClass({
             if(sim && size)
                 body = (<VisualCanvas 
                             name={name}
-                            sim={sim} 
-                            size={size}
-                            width={800}
-                            height={500} />);
+                            sys={sys}
+                            width={width}
+                            height={height} />);
             else
                 body = <div>Empty</div>;
         }

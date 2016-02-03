@@ -1,8 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var Graph = require('../algorithms/graph');
 var Parts = require('../algorithms/parts');
-var Config = require('../algorithms/config');
 
 var VisualCanvas = React.createClass({
     componentDidMount: function() {
@@ -17,16 +15,9 @@ var VisualCanvas = React.createClass({
 
         var canvas = ReactDOM.findDOMNode(this.refs.canvas);
         var ctx = canvas.getContext('2d');
-
-        // make the graph
-        //
-        var graph = Graph.make(sim, size);
-        var mst   = Graph.prims(graph);
-        var conf  = Config(name);
+        var sys = this.props.sys;
 
         // make system
-        //
-        var sys = Graph.mksys(name, graph, mst, width, height);
         var spring    = Parts.Spring(sys);
         var collision = Parts.Collision(sys);
         var boundary  = Parts.Boundary(sys, box);
@@ -35,7 +26,7 @@ var VisualCanvas = React.createClass({
         var drawing   = Parts.Draw(ctx, sys);
         var gravity   = Parts.Gravity(sys, width, height);
 
-           sys.edgeAccelerator(spring)
+        sys.edgeAccelerator(spring)
            .particleAccelerator(charge)
            .mover(gravity)
            .mover(collision)
@@ -45,9 +36,10 @@ var VisualCanvas = React.createClass({
            ;
 
         window.sys = sys;
-
-        sys.start(conf);
+        sys.start();
     },
+
+
     render: function() {
         var {
             width,
@@ -56,8 +48,7 @@ var VisualCanvas = React.createClass({
 
         return (
             <div>
-                <canvas width={width} height={height} ref="canvas">
-                </canvas>
+                <canvas width={width} height={height} ref="canvas" />
             </div>
         );
     }

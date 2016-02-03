@@ -5,6 +5,9 @@ var state = {
     sim: null,
     size: null,
     loading: false,
+    sys: null,
+    width: 800,
+    height: 500,
 };
 
 const store = assign({}, eventEmitter.prototype, {
